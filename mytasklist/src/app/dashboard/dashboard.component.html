@@ -12,28 +12,15 @@
 
 </nav>
 
-<form class="well">
+<form class="well" style="padding-top:30px" (submit)="addTask($event)">
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Add Task" style="width:50%"/>
-    <input type="date" class="form-control" style="width:30%"/>
-    <input type="button" value="Add"/>
+    <input type="text" class="form-control" [(ngModel)]= "title" name="title" placeholder="Add Task" style="width:50%;float:left"/>
+    <input type="date" class="form-control" [(ngModel)]= "date" name="date" style="width:30%;float:left"/>
+    <input type="button" value="Add" style="float:left" (click)="deleteTask(task._id)"/>
   </div>
+  <br><br>
 
 </form>
-<div class="task-list">
-  <div class="col-md-1">
-    <input type="checkbox">
-  </div>
-  <div class="col-md-7">
-    Some task
-  </div>
-  <div class="col-md-4">
-    date
-  </div>
-  <div class="col-md-4">
-    <input type="button" value="Delete" class="btn btn-danger"/>
-  </div>
 
-</div>
 
 <app-task></app-task>
