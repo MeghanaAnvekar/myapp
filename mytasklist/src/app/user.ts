@@ -1,4 +1,6 @@
-export interface User{
-  username : String,
-  password : String
+export class User{
+  username : String;
+  password : String;
+  name: String;
+  email:String;
 }

@@ -2,7 +2,15 @@ var express  = require('express');
 var router = express.Router();
 var mydb = require('../db');
 router.get('/',function(req,res,next){
-  res.render('index.html');
+  mydb.User.find({},function(err,user){
+    if(err)
+    {
+      console.log(err);
+      return res.status(500).json();
+    }
+    res.json(user);
+  });
+
 });
 
 router.post('/register',function(req,res){
@@ -16,25 +24,27 @@ router.post('/register',function(req,res){
   user.name = name;
   user.password = password;
   user.email = email;
+console.log('in register api.............');
 
-  mydb.User.findOne({username:user.username},function(err,user){
+/*  mydb.User.findOne({username:user.username},function(err,user){
     if(err)
     {
       console.log(err);
-      return res.status(500).send();
+      return res.status(500).json();
     }
     if (!user)
-    {
+    {*/
       user.save(function(err,savedUser){
         if(err)
           {
             console.log(err);
             return res.status(500).send();
           }
-          return res.json(savedUser);
-      });
-    }
-  });
+          console.log(savedUser);
+          return res.status(200).send();
+      //});
+         }
+       );
 });
 
 router.post('/login',function(req,res){
@@ -49,7 +59,7 @@ router.post('/login',function(req,res){
     }
     if (!user)
     {
-      return res.status(404).send();
+      return res.json({username:'nobody',password:'nobody',name:'nobody',email:'nobody'});
     }
 
     return res.status(200).send();
