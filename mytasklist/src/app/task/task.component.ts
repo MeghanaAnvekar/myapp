@@ -20,7 +20,7 @@ update:Boolean;
  Tasks:any;
   constructor(private taskService: TaskService,private userService:UserService ) {
     this.user = this.userService.getUserName();
-  //this.taskService.getTasks().subscribe(tasks => {this.temp = tasks; for(var x in this.temp){this.tasks.push(x);}});
+  this.taskService.getTasks().subscribe(tasks => {this.temp = tasks; });
 
 }
 
@@ -53,13 +53,13 @@ update:Boolean;
           for(var i = 0;i < tasks.length;++i){
             if(tasks[i]._id == id){
               tasks.splice(i,1);
-              this.Tasks.splice(i,1);
+            //  this.Tasks.splice(i,1);
             }
 
           }
       }
       this.tasks.push(updatedtask);
-      this.Tasks.push(updatedtask);
+      //this.Tasks.push(updatedtask);
 
       this.title ='';
 
@@ -68,6 +68,10 @@ update:Boolean;
 
   }
 
+updateTrue($event)
+{
+  this.update = true;
+}
 
   deleteTask(id){
     var tasks = this.tasks;

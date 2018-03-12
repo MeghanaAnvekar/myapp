@@ -3,14 +3,14 @@
     <div class="col-md-1">
       <input type="checkbox" style="display:inline ;padding-right:20px" [checked]="task.isDone" (click)="updateStatus(task)">
     </div>
-    <div class="col-md-7"   style="display:inline ;padding-right:20px">
-    {{task.title}}
+    <div class="col-md-7"style="display:inline ;padding-right:20px">
+            {{task.title}}
     </div>
     <div class="col-md-4" style="display:inline ;padding-right:20px">
       {{task.date}}
     </div>
     <div class="col-md-4" style="display:inline ;padding-right:20px">
-   <input type="button" value="Update" class="btn btn-warning" (click)="updateTask($event,task._id)"/>
+   <input type="button" value="Update" class="btn btn-warning" (click)="updateTrue($event)"/>
       <input type="button" value="Delete" class="btn btn-danger" (click)="deleteTask(task._id)"/>
 
     <div *ngIf="update">
