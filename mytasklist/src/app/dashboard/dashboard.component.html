@@ -6,7 +6,7 @@
     </li>
 
     <li class="nav-item" align="right">
-      <a class="nav-link"  routerLink="home"href="#">Logout</a>
+      <a class="nav-link"  routerLink="home" href="#">Logout</a>
     </li>
   </ul>
 
@@ -16,7 +16,7 @@
   <div class="form-group">
     <input type="text" class="form-control" [(ngModel)]= "title" name="title" placeholder="Add Task" style="width:50%;float:left"/>
     <input type="date" class="form-control" [(ngModel)]= "date" name="date" style="width:30%;float:left"/>
-    <input type="button" value="Add" style="float:left" (click)="deleteTask(task._id)"/>
+    <input class="btn btn-primary" type="submit" value="Add" style="float:left" />
   </div>
   <br><br>
 

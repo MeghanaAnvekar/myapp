@@ -30,6 +30,8 @@ router.get('/task:id',function(req,res,next){
 //save a task
 router.post('/task',function(req,res,next){
   var task = req.body;
+
+  console.log('in router post');
   if(!task.title || !(task.isDone +''))
   {
     res.status(400);
@@ -38,7 +40,8 @@ router.post('/task',function(req,res,next){
     });
   }
   else {
-    mydb.tasks.save(task,function(err, task){
+  var  data = new mydb.Task(task);
+    data.save(function(err, task){
       if(err){
         res.send(err);
       }

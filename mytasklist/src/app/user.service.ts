@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http'
 import 'rxjs/add/operator/map';
 
 import { User }  from './user';
+import { Observable } from 'rxjs/Observable';
+import {Response_Status} from './response_status';
 
 @Injectable()
 export class UserService {
@@ -23,6 +25,10 @@ export class UserService {
 
   getUserLoggedIn() {
   	return this.isUserLoggedIn;
+  }
+  getUserName()
+  {
+    return this.username;
   }
  getUser(user)
  {
@@ -51,13 +57,13 @@ export class UserService {
       name:user.name,
       email:user.email,
       password:user.password
-    })./*map((response: Response) => {
+    })/*.map((response: Response) => {
       this.responseStatus = response.status;
       return this.extractData(response);
-    }*/
+    }
     subscribe(
        (data:any) => {console.log(data); }
-    );
+    )*/;
 
  }
 

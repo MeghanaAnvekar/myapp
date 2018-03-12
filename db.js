@@ -22,7 +22,7 @@ var userSchema = new mongoose.Schema({
 var User = mongoose.model('users',userSchema);
 
 var taskSchema = new mongoose.Schema({
-  username:{type : String, unique : true},
+  username:{type : String},
   title : String,
   isDone : Boolean,
   date : Date

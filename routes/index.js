@@ -38,10 +38,12 @@ console.log('in register api.............');
         if(err)
           {
             console.log(err);
-            return res.status(500).send();
+            //return res.status(500).send();
+            return res.json({status:500});
           }
           console.log(savedUser);
-          return res.status(200).send();
+        //  return res.status(200).send();
+          return res.json({status:200});
       //});
          }
        );
@@ -55,14 +57,19 @@ router.post('/login',function(req,res){
     if(err)
     {
       console.log(err);
-      return res.status(500).send();
+    //  return res.status(500).send();
+    return res.json({status:500});
     }
     if (!user)
     {
-      return res.json({username:'nobody',password:'nobody',name:'nobody',email:'nobody'});
+      //return res.json({username:'nobody',password:'nobody',name:'nobody',email:'nobody'});
+      return res.json({status:404});
     }
 
-    return res.status(200).send();
+    //return res.status(200).send();
+      //return res.json({status:200});
+      console.log({status:200});
+      res.json(200);
 
   });
 });

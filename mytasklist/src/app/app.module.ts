@@ -30,7 +30,9 @@ const appRoutes:Routes =[
   },
   {
     path:'dashboard',
-    component:DashboardComponent
+    component:DashboardComponent,
+    children: [
+      { path: 'home', redirectTo: '', pathMatch: 'full' }]
   }
 ]
 @NgModule({
