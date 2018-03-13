@@ -1,3 +1,26 @@
+<form class="well" style="padding-top:30px" (submit)="addTask($event)">
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]= "title" name="title" placeholder="Add Task" style="width:50%;float:left"/>
+    <input type="date" class="form-control" [(ngModel)]= "date" name="date" style="width:30%;float:left"/>
+    <input class="btn btn-primary" type="submit" value="Add" style="float:left" />
+  </div>
+
+
+</form>
+<br><br>
+
+<div *ngIf="update">
+<form class="well" style="padding-top:30px" (submit)="updateTask($event)">
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]= "title" name="title" placeholder="Update Task" style="width:50%;float:left"/>
+    <input type="date" class="form-control" [(ngModel)]= "date" name="date" style="width:30%;float:left"/>
+    <input type="submit" value="Update" class="btn btn-success" style="float:left" />
+  </div>
+  <br><br>
+
+</form>
+
+</div> 
 <div class="task-list">
   <div *ngFor="let task of tasks">
     <div class="col-md-1">
@@ -10,22 +33,11 @@
       {{task.date}}
     </div>
     <div class="col-md-4" style="display:inline ;padding-right:20px">
-   <input type="button" value="Update" class="btn btn-warning" (click)="updateTrue($event)"/>
+   <input type="button" value="Edit" class="btn btn-warning" (click)="updateTrue($event,task._id)"/>
       <input type="button" value="Delete" class="btn btn-danger" (click)="deleteTask(task._id)"/>
-
-    <div *ngIf="update">
- <form class="well" style="padding-top:30px" (submit)="updateTask($event,task._id)">
-      <div class="form-group">
-        <input type="text" class="form-control" [(ngModel)]= "title" name="title" placeholder="Update Task" style="width:50%;float:left"/>
-        <input type="date" class="form-control" [(ngModel)]= "date" name="date" style="width:30%;float:left"/>
-        <input type="submit" value="Update" class="btn btn-success" style="float:left" />
-      </div>
-      <br><br>
-
-    </form>
-
   </div>
-  </div>
+
+
     <br><br>
 </div>
 </div>

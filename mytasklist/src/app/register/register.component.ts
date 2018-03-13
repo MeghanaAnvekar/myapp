@@ -37,9 +37,9 @@ export class RegisterComponent implements OnInit {
             return data.json();});*/
             //console.log(this.user.addUser(registerUser));
     /*  if( status === '200')
-      {this.user.setUserLoggedIn(registerUser.username);
+      {this.user.setUserLoggedIn(registerUser.username);*/
   		this.router.navigate(['dashboard']);
-    }*/
+    //}*/
   	//}
     //else
     {

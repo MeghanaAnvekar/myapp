@@ -22,17 +22,27 @@ const appRoutes:Routes =[
   },
   {
     path:'login',
-    component:LoginComponent
+    component:LoginComponent,
+    children: [ { path: 'login',redirectTo: 'login', pathMatch: 'full'},
+     { path: 'register', redirectTo: 'register', pathMatch: 'full'},
+      { path: '**', redirectTo: 'home', pathMatch: 'full' }]
   },
   {
     path:'register',
-    component:RegisterComponent
+    component:RegisterComponent,
+    children: [ { path: 'login',redirectTo: 'login', pathMatch: 'full'},
+     { path: 'register', redirectTo: 'register', pathMatch: 'full'},
+      { path: '**', redirectTo: 'home', pathMatch: 'full' }]
   },
   {
     path:'dashboard',
     component:DashboardComponent,
-    children: [
-      { path: 'home', redirectTo: '', pathMatch: 'full' }]
+
+  }
+  ,
+  {
+    path:'**',
+    component: HomeComponent
   }
 ]
 @NgModule({

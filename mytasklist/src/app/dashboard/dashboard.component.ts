@@ -29,22 +29,7 @@ import { FormsModule } from '@angular/forms';
   ngOnInit() {
 
   }
-  addTask(event){
-    console.log('in addTask of dashboard');
-    event.preventDefault();
-    var newTask = {
-      username:this.user,
-      title: this.title,
-      date: this.date,
-      isDone: false
-  };
-
-    this.taskService.addTask(newTask)
-    .subscribe(task => {
-      this.tasks.push(task);
-      this.title ='';
-    });
-  }
+  
 
 
 }
