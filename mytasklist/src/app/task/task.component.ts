@@ -17,6 +17,8 @@ export class TaskComponent implements OnInit {
  tasks :any;
 title : String;
 date : Date;
+_title : String;
+_date : Date;
 user: String;
 update:Boolean;
  Tasks:any;
@@ -38,6 +40,8 @@ update:Boolean;
   addTask(event){
           console.log('in addTask of dashboard');
           event.preventDefault();
+if(this.title && this.date)
+{
           var newTask = {
             username:this.user,
             title: this.title,
@@ -47,20 +51,21 @@ update:Boolean;
 
           this.taskService.addTask(newTask)
           .subscribe(task => {
-            this.tasks.push(task);
+            this.tasks.push(newTask);
             this.title ='';
           });
+}
   }
   updateTask(event)
   {
                 var updatedtask = {
                   _id:this.id,
                   username:this.user,
-                  title: this.title,
-                  date: this.date,
+                  title: this._title,
+                  date: this._date,
                   isDone: false
 
-                }
+                };
                 this.update = true;
                 console.log('in updateTask of dashboard');
                 this.taskService.updateStatus(updatedtask)
@@ -116,17 +121,21 @@ updateTrue($event,id)
     var _task = {
       _id:task._id,
       title:task.title,
-      isDone: !task.isDone
-    }
+      isDone: !task.isDone,
+      date: task.date,
+      task:task.username
+    };
 
     this.taskService.updateStatus(_task).subscribe(data =>{
-      this.tasks = data;
 
-        this.tasks.push(task);
+      console.log(' in updateStatus ');
+      console.log(data);
+
+        /*this.tasks.push(task);
         for(var x in this.tasks)
         {
           this.Tasks.push(x);
-        }
+        }*/
       task.isDone = !task.isDone;
     });
   }

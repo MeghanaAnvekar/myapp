@@ -81,8 +81,6 @@ export class UserService {
      name:user.name,
      email:user.email,
      password:user.password
-   }).subscribe(
-      (data:any) => {console.log(data);return data;}
-   );
+   });
  }
 }

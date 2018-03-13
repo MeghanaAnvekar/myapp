@@ -14,12 +14,14 @@ import {Response_Status} from '../response_status';
 })
 export class LoginComponent implements OnInit {
 message : String;
+showMessage: Boolean;
 response :Object;
-res_obj:Object;
+
   constructor(private router:Router, private user:UserService) { }
 
   ngOnInit() {
      console.log('hit');
+     this.showMessage = false;
   }
   loginUser(e) {
   	e.preventDefault();
@@ -32,19 +34,24 @@ res_obj:Object;
     loginUser.name='';
     loginUser.email='';
 
-this.user.getUser(loginUser).subscribe(data => this.response = data);
-/*for(var x in this.res_obj)
-{
-  this.response = x;
-}*/console.log(JSON.stringify(this.response));
-  	//if( this.response.status == 200) {
-      this.user.setUserLoggedIn(loginUser.username);
-  		this.router.navigate(['dashboard']);
-  	//}
-    //else
-    {
-        this.message = 'Invalid username or password!';
-    }
+   this.user.getUser(loginUser).subscribe(data => {this.response = data;console.log(data);
+
+  if( this.response == 200) {
+    this.showMessage = false;
+    this.user.setUserLoggedIn(loginUser.username);
+    this.router.navigate(['dashboard']);
+  }
+  else
+  {
+    this.showMessage = true;
+      this.message = 'Invalid username or password!';
+  }
+
+
+});
+
+console.log(JSON.stringify(this.response));
+
   }
 
 

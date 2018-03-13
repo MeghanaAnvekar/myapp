@@ -14,10 +14,13 @@ import { map } from "rxjs/operators";
 export class RegisterComponent implements OnInit {
 
   message:String;
+  showMessage:Boolean;
   constructor(private router:Router, private user:UserService) { }
 
   ngOnInit() {
      console.log('hit');
+     this.showMessage = false;
+
   }
   registerUser(e) {
   	e.preventDefault();
@@ -30,7 +33,20 @@ export class RegisterComponent implements OnInit {
     registerUser.username = e.target.elements[2].value;
   	registerUser. password = e.target.elements[3].value;
   console.log(registerUser.name+' '+registerUser.email);
-  this.user.addUser(registerUser);
+
+  var status: any;
+  this.user.addUser(registerUser).subscribe(data => {console.log(data);
+    status = data;
+    if( status !== 200)
+    { this.showMessage = false;
+      this.user.setUserLoggedIn(registerUser.name);
+      this.router.navigate(['dashboard']);
+    }
+    else{
+      this.showMessage = true;
+        this.message = 'User already exists !';
+    }
+  });
 
   //	if( status === '404') {
     /*  this.user.addUser(registerUser).map(data => {console.log("I CAN SEE DATA HERE: ", data.json());
@@ -38,12 +54,10 @@ export class RegisterComponent implements OnInit {
             //console.log(this.user.addUser(registerUser));
     /*  if( status === '200')
       {this.user.setUserLoggedIn(registerUser.username);*/
-  		this.router.navigate(['dashboard']);
+
     //}*/
   	//}
     //else
-    {
-        this.message = 'User already exists !';
-    }
+
   }
 }

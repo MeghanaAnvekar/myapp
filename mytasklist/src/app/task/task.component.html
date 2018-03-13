@@ -1,7 +1,7 @@
 <form class="well" style="padding-top:30px" (submit)="addTask($event)">
   <div class="form-group">
     <input type="text" class="form-control" [(ngModel)]= "title" name="title" placeholder="Add Task" style="width:50%;float:left"/>
-    <input type="date" class="form-control" [(ngModel)]= "date" name="date" style="width:30%;float:left"/>
+    <input type="date" class="form-control" [(ngModel)]= "date" name="date" style="padding-left:30px;width:30%;float:left"/>
     <input class="btn btn-primary" type="submit" value="Add" style="float:left" />
   </div>
 
@@ -12,32 +12,43 @@
 <div *ngIf="update">
 <form class="well" style="padding-top:30px" (submit)="updateTask($event)">
   <div class="form-group">
-    <input type="text" class="form-control" [(ngModel)]= "title" name="title" placeholder="Update Task" style="width:50%;float:left"/>
-    <input type="date" class="form-control" [(ngModel)]= "date" name="date" style="width:30%;float:left"/>
+    <input type="text" class="form-control" [(ngModel)]= "_title" name="title" placeholder="Update Task" style="width:50%;float:left"/>
+    <input type="date" class="form-control" [(ngModel)]= "_date" name="date" style="padding-left:30px;width:30%;float:left"/>
     <input type="submit" value="Update" class="btn btn-success" style="float:left" />
   </div>
   <br><br>
 
 </form>
 
-</div> 
-<div class="task-list">
-  <div *ngFor="let task of tasks">
-    <div class="col-md-1">
-      <input type="checkbox" style="display:inline ;padding-right:20px" [checked]="task.isDone" (click)="updateStatus(task)">
-    </div>
-    <div class="col-md-7"style="display:inline ;padding-right:20px">
-            {{task.title}}
-    </div>
-    <div class="col-md-4" style="display:inline ;padding-right:20px">
-      {{task.date}}
-    </div>
-    <div class="col-md-4" style="display:inline ;padding-right:20px">
-   <input type="button" value="Edit" class="btn btn-warning" (click)="updateTrue($event,task._id)"/>
-      <input type="button" value="Delete" class="btn btn-danger" (click)="deleteTask(task._id)"/>
-  </div>
-
-
-    <br><br>
 </div>
+<div class="task-list">
+<table class="table">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Task </th>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+  </tr>
+</thead>
+<tbody>
+
+  <tr  *ngFor="let task of tasks">
+    <td>
+      <input type="checkbox"  [checked]="task.isDone" (click)="updateStatus(task)">
+    </td>
+  <td>
+            {{task.title}}
+  </td>
+  <td>
+      {{task.date.substr(0,10)}}
+    </td>
+
+  <td>    <input type="button" value="Edit" class="btn btn-warning" (click)="updateTrue($event,task._id)"/></td>
+    <td>  <input type="button" value="Delete" class="btn btn-danger" (click)="deleteTask(task._id)"/></td>
+
+</tr>
+</tbody>
+</table>
 </div>

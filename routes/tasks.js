@@ -68,17 +68,20 @@ router.put('/task:id',function(req,res,next){
 
 var task = req.body;
 var updTask = {};
-
 if(task.isDone){
   updTask.isDone = task.isDone;
 }
-
 if(task.title)
 {
   updTask.title = task.title;
 }
+if(task.date)
+{
+updTask.date = task.date;
+}
 
-if(!updTask)
+
+if(!task.title)
 {
   res.status(400);
   res.json({
