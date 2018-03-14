@@ -4,8 +4,10 @@ var mydb = require('../db');
 var mongoose = require('mongoose');
 
 //get all tasks
-router.get('/tasks',function(req,res,next){
-  mydb.Task.find(function(err,tasks){
+router.get('/tasks/:username',function(req,res,next){
+ console.log(req.params.username);
+var p = req.params.username;
+  mydb.Task.find({username:p},function(err,tasks){
     if(err)
     {
       res.send(err);
@@ -68,9 +70,8 @@ router.put('/task:id',function(req,res,next){
 
 var task = req.body;
 var updTask = {};
-if(task.isDone){
+
   updTask.isDone = task.isDone;
-}
 if(task.title)
 {
   updTask.title = task.title;

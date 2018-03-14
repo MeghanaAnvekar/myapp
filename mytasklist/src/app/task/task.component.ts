@@ -25,17 +25,30 @@ update:Boolean;
  id:any;
   constructor(private taskService: TaskService,private userService:UserService ) {
     this.user = this.userService.getUserName();
-  this.taskService.getTasks().subscribe(tasks => {this.temp = tasks; });
+  //this.taskService.getTasks().subscribe(tasks => {this.temp = tasks; });
 
 }
 
   ngOnInit() {
-          this.taskService.getTasks().subscribe(tasks => {this.tasks = tasks});
+          this.taskService.getTasks(this.user).subscribe(t => {this.tasks = t});
           this.update=false;
-          for(var x in this.tasks)
+        /*  for(var x in this.tasks)
           {
             this.Tasks.push(x);
-          }
+          }*/
+
+        /*  var tasks = this.tasks;
+          if(tasks.length)
+          {
+            console.log('length of tasks');
+              for(var i = 0;i < tasks.length;++i){
+                if(tasks[i].username !== this.user){
+                  tasks.splice(i,1);
+                //  this.Tasks.splice(i,1);
+                }
+
+              }
+          }*/
   }
   addTask(event){
           console.log('in addTask of dashboard');
@@ -58,6 +71,8 @@ if(this.title && this.date)
   }
   updateTask(event)
   {
+    if(this._title && this._date)
+    {
                 var updatedtask = {
                   _id:this.id,
                   username:this.user,
@@ -88,7 +103,11 @@ if(this.title && this.date)
 
                   this.update = false;
                 });
-
+            }
+            else
+            {
+              this.update = false;
+            }
   }
 
 updateTrue($event,id)
@@ -118,14 +137,16 @@ updateTrue($event,id)
   }
 
   updateStatus(task){
+    var i =!task.isDone;
+    console.log('isdone ...'+i);
     var _task = {
       _id:task._id,
       title:task.title,
-      isDone: !task.isDone,
+      isDone: i,
       date: task.date,
-      task:task.username
+      username:task.username
     };
-
+console.log(_task);
     this.taskService.updateStatus(_task).subscribe(data =>{
 
       console.log(' in updateStatus ');

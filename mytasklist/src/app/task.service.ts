@@ -12,9 +12,9 @@ export class TaskService {
   constructor(private http:HttpClient) {
   console.log('Task Service Initialized...'); }
 
-  getTasks()
+  getTasks(username)
   {
-    return this.http.get('http://localhost:3000/api/tasks');
+    return this.http.get('http://localhost:3000/api/tasks/'+username);
   }
 
   addTask(newTask){
